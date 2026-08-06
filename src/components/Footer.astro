@@ -92,7 +92,7 @@ const footerLinks = {
       const email = form.querySelector('input')?.value?.trim();
       if (!email) return;
       status.textContent = 'Submitting...';
-      status.style.color = 'var(--color-text-light)';
+      status.style.color = 'var(--color-graphite)';
       try {
         const res = await fetch(`${API_URL}/subscribe`, {
           method: 'POST',
@@ -102,11 +102,11 @@ const footerLinks = {
         const data = await res.json().catch(() => ({}));
         if (res.ok) {
           status.textContent = 'Thank you for subscribing!';
-          status.style.color = 'var(--color-success, #4A7C59)';
+          status.style.color = '#4A7C59';
           form.reset();
         } else {
           status.textContent = data.error || 'Something went wrong. Please try again.';
-          status.style.color = 'var(--color-error, #C44536)';
+          status.style.color = '#C44536';
         }
       } catch {
         status.textContent = 'Network error. Please try again.';
@@ -119,75 +119,81 @@ const footerLinks = {
 
 <style>
   .footer {
-    background: var(--color-text);
-    color: var(--color-bg);
-    padding: var(--space-4xl) 0 var(--space-xl);
+    background: var(--color-carbon);
+    color: var(--color-fog);
+    padding: var(--spacing-80) 0 var(--spacing-24);
   }
 
   .footer-grid {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr 2fr;
-    gap: var(--space-2xl);
-    margin-bottom: var(--space-3xl);
+    gap: var(--spacing-32);
+    margin-bottom: var(--spacing-40);
   }
 
   .footer-logo {
     display: flex;
     align-items: center;
-    margin-bottom: var(--space-md);
+    gap: var(--spacing-8);
+    text-decoration: none;
+    margin-bottom: var(--spacing-16);
+  }
+
+  .footer-logo:hover {
+    opacity: 0.7;
   }
 
   .footer-logo-img {
-    height: 36px;
+    height: 34px;
     width: auto;
     display: block;
-    transition: opacity var(--transition-fast);
-  }
-
-  .footer-logo:hover .footer-logo-img {
-    opacity: 0.8;
+    filter: brightness(0) invert(1);
   }
 
   .footer-tagline {
-    color: var(--color-accent);
-    font-weight: 600;
-    margin-bottom: var(--space-md);
+    color: var(--color-stone);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--text-body-sm);
+    margin-bottom: var(--spacing-12);
   }
 
   .footer-desc {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.9rem;
-    margin-bottom: var(--space-lg);
+    color: var(--color-graphite);
+    font-size: var(--text-body-sm);
+    margin-bottom: var(--spacing-20);
+    line-height: var(--leading-body-sm);
   }
 
   .social-links {
     display: flex;
-    gap: var(--space-sm);
+    gap: var(--spacing-10);
   }
 
   .social-link {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: var(--radius-full);
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 700;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-icons);
+    background: var(--color-graphite-smoke);
+    color: var(--color-fog);
+    font-size: 11px;
+    font-weight: var(--font-weight-semibold);
     text-decoration: none;
     transition: background var(--transition-fast);
   }
 
   .social-link:hover {
-    background: var(--color-primary);
+    background: var(--color-signal-blue);
   }
 
   .footer-links-group h4 {
-    color: white;
-    font-size: 1rem;
-    margin-bottom: var(--space-lg);
+    color: var(--color-paper);
+    font-family: var(--font-inter);
+    font-size: var(--text-body-sm);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-16);
   }
 
   .footer-links-group ul {
@@ -195,72 +201,75 @@ const footerLinks = {
   }
 
   .footer-links-group li {
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--spacing-10);
   }
 
   .footer-links-group a {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.9rem;
+    color: var(--color-graphite);
+    font-size: var(--text-body-sm);
     text-decoration: none;
     transition: color var(--transition-fast);
   }
 
   .footer-links-group a:hover {
-    color: var(--color-accent);
+    color: var(--color-paper);
   }
 
   .footer-newsletter h4 {
-    color: white;
-    font-size: 1rem;
-    margin-bottom: var(--space-md);
+    color: var(--color-paper);
+    font-family: var(--font-inter);
+    font-size: var(--text-body-sm);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-12);
   }
 
   .footer-newsletter p {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.9rem;
-    margin-bottom: var(--space-md);
+    color: var(--color-graphite);
+    font-size: var(--text-body-sm);
+    margin-bottom: var(--spacing-16);
   }
 
   .newsletter-form {
     display: flex;
-    gap: var(--space-sm);
+    gap: var(--spacing-8);
   }
 
   .newsletter-input {
     flex: 1;
-    padding: var(--space-sm) var(--space-md);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: var(--radius-md);
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    font-size: 0.9rem;
+    padding: var(--spacing-10) var(--spacing-12);
+    border: 1px solid var(--color-graphite-smoke);
+    border-radius: var(--radius-cards);
+    background: var(--color-surface-dark);
+    color: var(--color-paper);
+    font-size: var(--text-body-sm);
+    font-family: var(--font-inter);
   }
 
   .newsletter-input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--color-stone);
   }
 
   .newsletter-input:focus {
     outline: none;
-    border-color: var(--color-accent);
+    border-color: var(--color-paper);
   }
 
   .newsletter-status {
-    color: var(--color-accent);
-    font-size: 0.85rem;
-    margin-top: var(--space-sm);
+    color: var(--color-stone);
+    font-size: var(--text-caption);
+    margin-top: var(--spacing-8);
     min-height: 1.2em;
   }
 
   .footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: var(--space-xl);
+    border-top: 1px solid var(--color-graphite-smoke);
+    padding-top: var(--spacing-24);
     text-align: center;
   }
 
   .footer-bottom p {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.85rem;
+    color: var(--color-stone);
+    font-size: var(--text-caption);
     margin: 0;
   }
 

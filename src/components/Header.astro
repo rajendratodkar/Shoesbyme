@@ -12,7 +12,8 @@ const navItems = [
   <div class="container">
     <nav class="nav">
       <a href="/" class="logo">
-        <img src="/images/shoesbyme-logo.webp" alt="ShoesByMe" width="160" height="40" class="logo-img" />
+        <span class="logo-wordmark">ShoesByMe</span>
+        <span class="logo-dot" aria-hidden="true"></span>
       </a>
 
       <ul class="nav-links">
@@ -22,6 +23,10 @@ const navItems = [
           </li>
         ))}
       </ul>
+
+      <div class="nav-actions">
+        <a href="/blog" class="btn btn-primary btn-sm">Subscribe</a>
+      </div>
 
       <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
         <span></span>
@@ -51,72 +56,84 @@ const navItems = [
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(253, 251, 247, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--color-border-light);
+    background: var(--color-paper);
+    border-bottom: 1px solid var(--color-ink);
   }
 
   .nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 72px;
+    height: 56px;
   }
 
   .logo {
     display: flex;
     align-items: center;
-    flex-shrink: 0;
+    gap: var(--spacing-8);
     text-decoration: none;
+    flex-shrink: 0;
   }
 
-  .logo-img {
-    height: 36px;
-    width: auto;
-    display: block;
-    transition: opacity var(--transition-fast);
+  .logo:hover {
+    opacity: 0.7;
   }
 
-  .logo:hover .logo-img {
-    opacity: 0.8;
+  .logo-wordmark {
+    font-family: var(--font-inter);
+    font-weight: 700;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    line-height: 1;
+  }
+
+  .logo-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-signal-blue);
+    flex-shrink: 0;
   }
 
   .nav-links {
     display: flex;
-    gap: var(--space-xl);
+    gap: var(--spacing-20);
     list-style: none;
   }
 
   .nav-link {
-    color: var(--color-text-light);
+    font-family: var(--font-inter);
     font-weight: 500;
-    font-size: 0.95rem;
-    transition: color var(--transition-fast);
+    font-size: 15px;
+    color: var(--color-ink);
     text-decoration: none;
+    padding: var(--spacing-6) 0;
+    transition: opacity var(--transition-fast);
   }
 
   .nav-link:hover {
-    color: var(--color-primary);
+    opacity: 0.6;
   }
 
   .nav-actions {
     display: flex;
     align-items: center;
-    gap: var(--space-md);
   }
 
   .mobile-menu-btn {
     display: none;
     flex-direction: column;
     gap: 5px;
-    padding: var(--space-sm);
+    padding: var(--spacing-8);
   }
 
   .mobile-menu-btn span {
     display: block;
     width: 24px;
     height: 2px;
-    background: var(--color-text);
+    background: var(--color-ink);
     transition: all var(--transition-fast);
   }
 
@@ -131,13 +148,14 @@ const navItems = [
       display: flex;
       flex-direction: column;
       position: absolute;
-      top: 72px;
+      top: 56px;
       left: 0;
       right: 0;
-      background: var(--color-bg);
-      padding: var(--space-lg);
-      border-bottom: 1px solid var(--color-border-light);
+      background: var(--color-paper);
+      padding: var(--spacing-20);
+      border-bottom: 1px solid var(--color-ink);
       z-index: 99;
+      gap: var(--spacing-16);
     }
 
     .nav-actions.open {
