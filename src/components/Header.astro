@@ -12,8 +12,7 @@ const navItems = [
   <div class="container">
     <nav class="nav">
       <a href="/" class="logo">
-        <span class="logo-icon">👟</span>
-        <span class="logo-text">ShoesByMe</span>
+        <img src="/images/shoesbyme-logo.webp" alt="ShoesByMe" width="160" height="40" class="logo-img" />
       </a>
 
       <ul class="nav-links">
@@ -67,20 +66,19 @@ const navItems = [
   .logo {
     display: flex;
     align-items: center;
-    gap: var(--space-sm);
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-text);
+    flex-shrink: 0;
     text-decoration: none;
   }
 
-  .logo:hover {
-    color: var(--color-primary);
+  .logo-img {
+    height: 36px;
+    width: auto;
+    display: block;
+    transition: opacity var(--transition-fast);
   }
 
-  .logo-icon {
-    font-size: 1.8rem;
+  .logo:hover .logo-img {
+    opacity: 0.8;
   }
 
   .nav-links {

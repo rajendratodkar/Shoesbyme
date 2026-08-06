@@ -24,8 +24,7 @@ const footerLinks = {
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="/" class="footer-logo">
-          <span class="logo-icon">👟</span>
-          <span>ShoesByMe</span>
+          <img src="/images/shoesbyme-logo.webp" alt="ShoesByMe" width="160" height="40" class="footer-logo-img" />
         </a>
         <p class="footer-tagline">Step Into Your Style</p>
         <p class="footer-desc">Your trusted source for shoe knowledge, care tips, and brand history.</p>
@@ -115,17 +114,18 @@ const footerLinks = {
   .footer-logo {
     display: flex;
     align-items: center;
-    gap: var(--space-sm);
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: white;
-    text-decoration: none;
     margin-bottom: var(--space-md);
   }
 
-  .footer-logo .logo-icon {
-    font-size: 1.8rem;
+  .footer-logo-img {
+    height: 36px;
+    width: auto;
+    display: block;
+    transition: opacity var(--transition-fast);
+  }
+
+  .footer-logo:hover .footer-logo-img {
+    opacity: 0.8;
   }
 
   .footer-tagline {
