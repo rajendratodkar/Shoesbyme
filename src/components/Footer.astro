@@ -82,17 +82,37 @@ const footerLinks = {
 </footer>
 
 <script>
-  const form = document.getElementById('newsletter-form') as HTMLFormElement;
+  const API_URL = import.meta.env.PUBLIC_NEWSLETTER_API_URL || 'https://api.shoesbyme.com';
+
+  const form = document.getElementById('newsletter-form');
   const status = document.getElementById('newsletter-status');
   if (form && status) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const email = form.querySelector('input')?.value;
-      if (email) {
-        status.textContent = 'Thank you for subscribing!';
-        form.reset();
-        setTimeout(() => { status.textContent = ''; }, 3000);
+      const email = form.querySelector('input')?.value?.trim();
+      if (!email) return;
+      status.textContent = 'Submitting...';
+      status.style.color = 'var(--color-text-light)';
+      try {
+        const res = await fetch(`${API_URL}/subscribe`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok) {
+          status.textContent = 'Thank you for subscribing!';
+          status.style.color = 'var(--color-success, #4A7C59)';
+          form.reset();
+        } else {
+          status.textContent = data.error || 'Something went wrong. Please try again.';
+          status.style.color = 'var(--color-error, #C44536)';
+        }
+      } catch {
+        status.textContent = 'Network error. Please try again.';
+        status.style.color = 'var(--color-error, #C44536)';
       }
+      setTimeout(() => { status.textContent = ''; }, 5000);
     });
   }
 </script>

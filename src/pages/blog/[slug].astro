@@ -118,6 +118,7 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200));
                 <input type="email" id="post-email" placeholder="Enter your email" required />
                 <button type="submit" class="btn btn-primary">Subscribe</button>
               </form>
+              <p class="newsletter-status" id="post-newsletter-status" aria-live="polite"></p>
             </div>
           </div>
 
@@ -228,6 +229,40 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200));
       toc.appendChild(tocList);
     } else if (toc) {
       toc.closest('.sidebar-card')?.remove();
+    }
+
+    // Post-page newsletter form
+    const postForm = document.getElementById('post-newsletter');
+    const postStatus = document.getElementById('post-newsletter-status');
+    if (postForm && postStatus) {
+      const API_URL = import.meta.env.PUBLIC_NEWSLETTER_API_URL || 'https://api.shoesbyme.com';
+      postForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = postForm.querySelector('input')?.value?.trim();
+        if (!email) return;
+        postStatus.textContent = 'Submitting...';
+        postStatus.style.color = 'rgba(255,255,255,0.85)';
+        try {
+          const res = await fetch(`${API_URL}/subscribe`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email }),
+          });
+          const data = await res.json().catch(() => ({}));
+          if (res.ok) {
+            postStatus.textContent = 'Thank you for subscribing!';
+            postStatus.style.color = '#90EE90';
+            postForm.reset();
+          } else {
+            postStatus.textContent = data.error || 'Something went wrong. Please try again.';
+            postStatus.style.color = '#FFB3B3';
+          }
+        } catch {
+          postStatus.textContent = 'Network error. Please try again.';
+          postStatus.style.color = '#FFB3B3';
+        }
+        setTimeout(() => { postStatus.textContent = ''; }, 5000);
+      });
     }
   </script>
 
@@ -526,6 +561,13 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200));
   .newsletter-form .btn:hover {
     background: var(--color-accent);
     color: white;
+  }
+
+  .newsletter-status {
+    text-align: center;
+    font-size: 0.9rem;
+    margin-top: var(--space-md);
+    min-height: 1.2em;
   }
 
   /* Sidebar */

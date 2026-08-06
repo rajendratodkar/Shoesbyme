@@ -1,0 +1,11 @@
+{
+  "name": "shoesbyme-newsletter-api",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Newsletter subscription API for ShoesByMe",
+  "main": "subscribe.js",
+  "scripts": {
+    "start": "node subscribe.js",
+    "dev": "node --watch subscribe.js"
+  }
+}
