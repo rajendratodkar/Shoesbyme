@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const sizeData = [
+const mensSizes = [
   { us: '6', uk: '5.5', eu: '38.5', cm: '24' },
   { us: '6.5', uk: '6', eu: '39', cm: '24.5' },
   { us: '7', uk: '6.5', eu: '40', cm: '25' },
@@ -18,92 +18,195 @@ const sizeData = [
   { us: '13', uk: '12.5', eu: '47.5', cm: '31' },
 ];
 
-const measurementSteps = [
-  { step: '1', title: 'Trace Your Foot', description: 'Place your foot on a piece of paper and trace around it with a pen.' },
-  { step: '2', title: 'Measure Length', description: 'Measure from the heel to the longest toe in centimeters.' },
-  { step: '3', title: 'Measure Width', description: 'Measure the widest part of your foot across the ball.' },
-  { step: '4', title: 'Find Your Size', description: 'Use our size chart to find your perfect fit.' },
+const womensSizes = [
+  { us: '5', uk: '3.5', eu: '36', cm: '22.5' },
+  { us: '5.5', uk: '4', eu: '36.5', cm: '23' },
+  { us: '6', uk: '4.5', eu: '37', cm: '23.5' },
+  { us: '6.5', uk: '5', eu: '37.5', cm: '24' },
+  { us: '7', uk: '5.5', eu: '38', cm: '24.5' },
+  { us: '7.5', uk: '6', eu: '38.5', cm: '25' },
+  { us: '8', uk: '6.5', eu: '39', cm: '25.5' },
+  { us: '8.5', uk: '7', eu: '40', cm: '26' },
+  { us: '9', uk: '7.5', eu: '40.5', cm: '26.5' },
+  { us: '9.5', uk: '8', eu: '41', cm: '27' },
+  { us: '10', uk: '8.5', eu: '42', cm: '27.5' },
+  { us: '10.5', uk: '9', eu: '42.5', cm: '28' },
+  { us: '11', uk: '9.5', eu: '43', cm: '28.5' },
 ];
 ---
 
 <BaseLayout title="Size Guide" description="Find your perfect shoe size with our comprehensive international size conversion chart and measurement guide.">
   <!-- Hero -->
   <section class="size-hero">
-    <div class="container">
+    <div class="container container-narrow">
+      <div class="hero-icon" aria-hidden="true">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><path d="M8 40c0-8 8-20 24-20s18 8 18 16c0 6-4 8-8 8H20c-6 0-12-2-12-4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 44v4M28 44v6M36 44v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
       <span class="badge">Size Guide</span>
       <h1>Find Your Perfect <span class="highlight">Fit</span></h1>
       <p class="hero-desc">
         Getting the right size is essential for comfort. Use our comprehensive
-        size guide to find your perfect fit.
+        size guide and conversion chart to find your perfect fit.
       </p>
     </div>
   </section>
 
   <!-- Measurement Steps -->
-  <section class="section">
-    <div class="container">
+  <section class="section measure-section">
+    <div class="container container-narrow">
       <div class="section-header">
-        <h2>How to Measure</h2>
-        <p>Follow these simple steps to find your accurate shoe size.</p>
+        <span class="badge">Step by Step</span>
+        <h2>How to Measure Your Feet</h2>
+        <p>Follow these four simple steps to find your accurate shoe size at home.</p>
       </div>
-      <div class="grid grid-4">
-        {measurementSteps.map(step => (
-          <div class="measure-step">
-            <span class="step-number">{step.step}</span>
-            <h3>{step.title}</h3>
-            <p>{step.description}</p>
+
+      <div class="measure-grid">
+        <!-- Step 1 -->
+        <div class="measure-card">
+          <div class="measure-icon">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="6" y="10" width="22" height="24" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M10 16h14M10 21h10M10 26h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="32" cy="32" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M29 32l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
-        ))}
+          <span class="measure-step-num">01</span>
+          <h3>Trace Your Foot</h3>
+          <p>Place your foot on a piece of paper and trace around it with a pen. Keep the pen vertical.</p>
+        </div>
+        <!-- Step 2 -->
+        <div class="measure-card">
+          <div class="measure-icon">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><path d="M8 28L32 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M8 28V32H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M32 12V8H28" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="34" cy="10" r="4" stroke="currentColor" stroke-width="1.5"/><circle cx="6" cy="30" r="4" stroke="currentColor" stroke-width="1.5"/></svg>
+          </div>
+          <span class="measure-step-num">02</span>
+          <h3>Measure Length</h3>
+          <p>Measure from the back of your heel to your longest toe, in centimeters.</p>
+        </div>
+        <!-- Step 3 -->
+        <div class="measure-card">
+          <div class="measure-icon">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><path d="M10 12h20M10 20h20M10 28h20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M14 8v4M26 8v4M14 16v4M26 16v4M14 24v4M26 24v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <span class="measure-step-num">03</span>
+          <h3>Measure Width</h3>
+          <p>Measure the widest part of your foot across the ball, then compare to the chart.</p>
+        </div>
+        <!-- Step 4 -->
+        <div class="measure-card">
+          <div class="measure-icon">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="14" stroke="currentColor" stroke-width="1.5"/><path d="M15 20l3 3 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 8l4 4M28 28l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <span class="measure-step-num">04</span>
+          <h3>Match Your Size</h3>
+          <p>Find your measurement in the conversion chart below to get your perfect size.</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Size Chart -->
-  <section class="section section-alt">
-    <div class="container">
+  <section class="section section-alt chart-section">
+    <div class="container container-narrow">
       <div class="section-header">
-        <h2>Men's Size Chart</h2>
-        <p>International shoe size conversion for men's footwear.</p>
-      </div>
-      <div class="size-table-wrapper">
-        <table class="size-table">
-          <caption class="sr-only">Men's International Shoe Size Conversion</caption>
-          <thead>
-            <tr>
-              <th>US</th>
-              <th>UK</th>
-              <th>EU</th>
-              <th>CM</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sizeData.map(size => (
-              <tr>
-                <td>{size.us}</td>
-                <td>{size.uk}</td>
-                <td>{size.eu}</td>
-                <td>{size.cm}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <span class="badge">Conversion Chart</span>
+        <h2>International Size Chart</h2>
+        <p>Switch between men's and women's sizes using the tabs above the chart.</p>
       </div>
 
-      <div class="size-tips">
-        <h3>Fit Tips</h3>
-        <ul>
-          <li>Measure your feet in the afternoon when they're at their largest.</li>
-          <li>If you're between sizes, we recommend going half a size up.</li>
-          <li>Width matters as much as length — consider your foot width when choosing sizes.</li>
-          <li>Different brands may fit differently — always check brand-specific sizing.</li>
-        </ul>
+      <!-- Tabs -->
+      <div class="chart-tabs" role="tablist">
+        <button class="chart-tab active" role="tab" aria-selected="true" data-target="mens" id="tab-mens">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="6" r="4"/><path d="M12 10v10M9 17l3-3 3 3"/></svg>
+          Men's Sizes
+        </button>
+        <button class="chart-tab" role="tab" aria-selected="false" data-target="womens" id="tab-womens">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="6" r="4"/><path d="M12 10v6M10 21h4M9 16l3 3 3-3"/></svg>
+          Women's Sizes
+        </button>
+      </div>
+
+      <!-- Men's Chart -->
+      <div class="chart-panel active" role="tabpanel" id="panel-mens" aria-labelledby="tab-mens">
+        <div class="table-card">
+          <table class="size-table">
+            <caption class="sr-only">Men's International Shoe Size Conversion Chart</caption>
+            <thead>
+              <tr>
+                <th scope="col">US</th>
+                <th scope="col">UK</th>
+                <th scope="col">EU</th>
+                <th scope="col">CM</th>
+              </tr>
+            </thead>
+            <tbody>
+              {mensSizes.map(s => (
+                <tr>
+                  <th scope="row">{s.us}</th>
+                  <td>{s.uk}</td>
+                  <td>{s.eu}</td>
+                  <td>{s.cm}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Women's Chart -->
+      <div class="chart-panel" role="tabpanel" id="panel-womens" aria-labelledby="tab-womens" hidden>
+        <div class="table-card">
+          <table class="size-table">
+            <caption class="sr-only">Women's International Shoe Size Conversion Chart</caption>
+            <thead>
+              <tr>
+                <th scope="col">US</th>
+                <th scope="col">UK</th>
+                <th scope="col">EU</th>
+                <th scope="col">CM</th>
+              </tr>
+            </thead>
+            <tbody>
+              {womensSizes.map(s => (
+                <tr>
+                  <th scope="row">{s.us}</th>
+                  <td>{s.uk}</td>
+                  <td>{s.eu}</td>
+                  <td>{s.cm}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Fit Tips -->
+      <div class="fit-tips">
+        <div class="fit-tips-header">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="12" stroke="currentColor" stroke-width="1.5"/><path d="M14 8v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="14" cy="18" r="1.5" fill="currentColor"/></svg>
+          <h3>Fit Tips</h3>
+        </div>
+        <div class="fit-tips-grid">
+          <div class="fit-tip">
+            <span class="fit-tip-icon" aria-hidden="true">🕐</span>
+            <p>Measure your feet in the afternoon when they're at their largest.</p>
+          </div>
+          <div class="fit-tip">
+            <span class="fit-tip-icon" aria-hidden="true">📏</span>
+            <p>If you're between sizes, we recommend going half a size up.</p>
+          </div>
+          <div class="fit-tip">
+            <span class="fit-tip-icon" aria-hidden="true">↔️</span>
+            <p>Width matters as much as length — consider your foot width when choosing.</p>
+          </div>
+          <div class="fit-tip">
+            <span class="fit-tip-icon" aria-hidden="true">👟</span>
+            <p>Different brands may fit differently — always check brand-specific sizing.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
   <section class="cta-banner">
-    <div class="container">
+    <div class="container container-narrow">
       <div class="cta-content">
         <h2>Need More Help?</h2>
         <p>Check out our blog for more sizing tips and brand-specific guides.</p>
@@ -113,151 +216,340 @@ const measurementSteps = [
   </section>
 </BaseLayout>
 
-<style>
-  .size-hero {
-    padding: var(--space-4xl) 0;
-    background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
-    text-align: center;
-  }
+<script>
+  const tabs = document.querySelectorAll('.chart-tab');
+  const panels = document.querySelectorAll('.chart-panel');
 
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+      panels.forEach(p => { p.classList.remove('active'); p.hidden = true; });
+
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      const target = document.getElementById(`panel-${tab.dataset.target}`);
+      if (target) { target.classList.add('active'); target.hidden = false; }
+    });
+  });
+</script>
+
+<style>
+  /* ── Hero ── */
+  .size-hero {
+    padding: var(--space-4xl) 0 var(--space-3xl);
+    background: linear-gradient(160deg, var(--color-bg) 0%, var(--color-bg-alt) 60%, var(--color-accent-light) 100%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .size-hero::before {
+    content: '';
+    position: absolute;
+    top: -80px;
+    right: -80px;
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(212,165,116,0.25) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .size-hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px;
+    left: -40px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(139,69,19,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .hero-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 96px;
+    height: 96px;
+    border-radius: var(--radius-xl);
+    background: var(--color-bg-card);
+    box-shadow: var(--shadow-lg);
+    color: var(--color-primary);
+    margin-bottom: var(--space-xl);
+  }
   .size-hero h1 {
     font-size: 3rem;
-    margin: var(--space-lg) 0;
+    margin: var(--space-lg) 0 var(--space-md);
+    position: relative;
+    z-index: 1;
   }
-
   .highlight {
     color: var(--color-primary);
+    position: relative;
   }
-
   .hero-desc {
-    max-width: 600px;
+    max-width: 540px;
     margin: 0 auto;
     font-size: 1.1rem;
     color: var(--color-text-light);
+    position: relative;
+    z-index: 1;
   }
 
-  .section-header {
+  /* ── Measurement Steps ── */
+  .measure-section .section-header { margin-bottom: var(--space-3xl); }
+  .measure-section .section-header .badge { margin-bottom: var(--space-sm); }
+
+  .measure-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-xl);
+    position: relative;
+  }
+  .measure-grid::before {
+    content: '';
+    position: absolute;
+    top: 48px;
+    left: 12%;
+    right: 12%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-border) 15%, var(--color-border) 85%, transparent);
+    z-index: 0;
+  }
+
+  .measure-card {
     text-align: center;
-    margin-bottom: var(--space-3xl);
+    position: relative;
+    z-index: 1;
+    padding: var(--space-xl) var(--space-md);
+    border-radius: var(--radius-xl);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-light);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
   }
-
-  .section-header h2 {
-    margin-bottom: var(--space-md);
+  .measure-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
   }
-
-  .section-header p {
-    color: var(--color-text-light);
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  .measure-step {
-    text-align: center;
-    padding: var(--space-xl);
-  }
-
-  .step-number {
-    display: inline-block;
-    width: 60px;
-    height: 60px;
-    line-height: 60px;
-    background: var(--color-accent-light);
-    color: var(--color-primary-dark);
-    border-radius: var(--radius-full);
-    font-size: 1.25rem;
-    font-weight: 700;
-    font-family: var(--font-heading);
+  .measure-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, var(--color-accent-light) 0%, var(--color-bg-alt) 100%);
+    color: var(--color-primary);
     margin-bottom: var(--space-lg);
   }
-
-  .measure-step h3 {
-    margin-bottom: var(--space-md);
+  .measure-step-num {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    opacity: 0.5;
+    margin-bottom: var(--space-sm);
   }
-
-  .measure-step p {
+  .measure-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: var(--space-sm);
+  }
+  .measure-card p {
+    font-size: 0.88rem;
     color: var(--color-text-light);
-    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
   }
 
-  .size-table-wrapper {
-    overflow-x: auto;
+  /* ── Chart Section ── */
+  .chart-section .section-header { margin-bottom: var(--space-2xl); }
+  .chart-section .section-header .badge { margin-bottom: var(--space-sm); }
+
+  /* Tabs */
+  .chart-tabs {
+    display: flex;
+    gap: var(--space-sm);
+    justify-content: center;
+    margin-bottom: var(--space-2xl);
+  }
+  .chart-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-xl);
+    border-radius: var(--radius-full);
+    border: 2px solid var(--color-border);
+    background: var(--color-bg-card);
+    color: var(--color-text-light);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+  .chart-tab:hover {
+    border-color: var(--color-accent);
+    color: var(--color-text);
+  }
+  .chart-tab.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+  }
+  .chart-tab svg { flex-shrink: 0; }
+
+  /* Panels */
+  .chart-panel { display: none; animation: fadeSlide 0.3s ease; }
+  .chart-panel.active { display: block; }
+  @keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Table Card */
+  .table-card {
+    background: var(--color-bg-card);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    border: 1px solid var(--color-border-light);
     margin-bottom: var(--space-2xl);
   }
 
+  /* Size Table */
   .size-table {
     width: 100%;
     border-collapse: collapse;
-    background: var(--color-bg-card);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
   }
-
-  .size-table th,
-  .size-table td {
+  .size-table thead th {
+    padding: var(--space-lg) var(--space-xl);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: white;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-align: center;
+  }
+  .size-table thead th:first-child {
+    background: linear-gradient(135deg, var(--color-primary-dark) 0%, #4a2208 100%);
+  }
+  .size-table tbody tr {
+    transition: background var(--transition-fast);
+  }
+  .size-table tbody tr:nth-child(even) {
+    background: var(--color-bg-alt);
+  }
+  .size-table tbody tr:hover {
+    background: var(--color-accent-light);
+  }
+  .size-table tbody th,
+  .size-table tbody td {
     padding: var(--space-md) var(--space-xl);
     text-align: center;
     border-bottom: 1px solid var(--color-border-light);
+    font-size: 0.95rem;
   }
-
-  .size-table th {
-    background: var(--color-primary);
-    color: white;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 0.05em;
-  }
-
-  .size-table tr:hover {
-    background: var(--color-bg-alt);
-  }
-
-  .size-table tr:last-child td {
+  .size-table tbody tr:last-child th,
+  .size-table tbody tr:last-child td {
     border-bottom: none;
   }
+  .size-table tbody th[scope="row"] {
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    background: rgba(139, 69, 19, 0.04);
+  }
+  .size-table tdata td {
+    color: var(--color-text);
+    font-variant-numeric: tabular-nums;
+  }
 
-  .size-tips {
+  /* ── Fit Tips ── */
+  .fit-tips {
     background: var(--color-bg-card);
-    border-radius: var(--radius-lg);
-    padding: var(--space-xl);
+    border-radius: var(--radius-xl);
+    padding: var(--space-2xl);
     border: 1px solid var(--color-border-light);
+    box-shadow: var(--shadow-md);
   }
-
-  .size-tips h3 {
-    margin-bottom: var(--space-lg);
+  .fit-tips-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-lg);
+    border-bottom: 2px solid var(--color-border-light);
   }
-
-  .size-tips ul {
-    list-style: disc;
-    padding-left: var(--space-xl);
+  .fit-tips-header svg {
+    color: var(--color-primary);
+    flex-shrink: 0;
   }
-
-  .size-tips li {
+  .fit-tips-header h3 {
+    margin: 0;
+    font-size: 1.3rem;
+  }
+  .fit-tips-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+  }
+  .fit-tip {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    transition: background var(--transition-fast);
+  }
+  .fit-tip:hover {
+    background: var(--color-bg-alt);
+  }
+  .fit-tip-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    line-height: 1.2;
+  }
+  .fit-tip p {
+    margin: 0;
+    font-size: 0.9rem;
     color: var(--color-text-light);
-    margin-bottom: var(--space-sm);
-    line-height: 1.6;
+    line-height: 1.5;
   }
 
+  /* ── CTA ── */
   .cta-banner {
     background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     padding: var(--space-4xl) 0;
     text-align: center;
   }
-
   .cta-content h2 {
     color: white;
     margin-bottom: var(--space-md);
+    font-size: 2rem;
   }
-
   .cta-content p {
     color: rgba(255, 255, 255, 0.9);
     margin-bottom: var(--space-xl);
+    font-size: 1.05rem;
   }
 
-  @media (max-width: 768px) {
-    .size-hero h1 {
-      font-size: 2rem;
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .measure-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
+    .measure-grid::before { display: none; }
+  }
+  @media (max-width: 768px) {
+    .size-hero h1 { font-size: 2rem; }
+    .measure-grid { grid-template-columns: 1fr; }
+    .fit-tips-grid { grid-template-columns: 1fr; }
+    .chart-tabs { flex-direction: column; align-items: stretch; }
+    .size-table { font-size: 0.85rem; }
+    .size-table thead th,
+    .size-table tbody th,
+    .size-table tbody td { padding: var(--space-sm) var(--space-md); }
   }
 </style>
