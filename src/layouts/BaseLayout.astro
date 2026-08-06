@@ -1,0 +1,106 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  canonicalURL?: string;
+  type?: string;
+}
+
+const {
+  title,
+  description = 'Premium custom shoes crafted for comfort, style, and individuality. Step Into Your Style with ShoesByMe.',
+  image = '/images/logo.png',
+  canonicalURL = Astro.url.href,
+  type = 'website',
+} = Astro.props;
+
+const siteTitle = 'ShoesByMe';
+const fullTitle = title === 'Home' ? `${siteTitle} — Step Into Your Style` : `${title} | ${siteTitle}`;
+const siteUrl = 'https://shoesbyme.com';
+const absoluteImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
+const cleanCanonical = canonicalURL.split('?')[0];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content={description}>
+  <meta name="author" content="ShoesByMe">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href={cleanCanonical}>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content={type}>
+  <meta property="og:url" content={cleanCanonical}>
+  <meta property="og:title" content={fullTitle}>
+  <meta property="og:description" content={description}>
+  <meta property="og:image" content={absoluteImage}>
+  <meta property="og:site_name" content={siteTitle}>
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={fullTitle}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content={absoluteImage}>
+
+  <title>{fullTitle}</title>
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- JSON-LD Organization Schema -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "ShoesByMe",
+    "url": siteUrl,
+    "logo": `${siteUrl}/images/logo.png`,
+    "description": "Premium custom shoes crafted for comfort, style, and individuality.",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "rajendra@shoesbyme.com",
+      "contactType": "customer service"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Ganesh Archade, Katraj",
+      "addressLocality": "Pune",
+      "addressRegion": "Maharashtra",
+      "postalCode": "411046",
+      "addressCountry": "IN"
+    },
+    "sameAs": []
+  })} />
+</head>
+<body>
+  <Header />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+</body>
+</html>
+
+<style is:global>
+  :root {
+    --font-heading: 'Playfair Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  body {
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+</style>

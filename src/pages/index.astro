@@ -1,0 +1,470 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog', ({ data }) => !data.draft);
+const latestPosts = posts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 6);
+
+const stats = [
+  { value: '70+', label: 'Brands Covered' },
+  { value: '100+', label: 'Articles Published' },
+  { value: '5+', label: 'Years of Research' },
+  { value: '2', label: 'Expert Categories' },
+];
+
+const categories = [
+  {
+    title: "Shoe Care",
+    description: 'Expert tips on cleaning, maintaining, and protecting your footwear investment.',
+    icon: '🧹',
+    href: '/blog',
+  },
+  {
+    title: "Brand History",
+    description: 'Discover the fascinating stories behind your favorite footwear brands.',
+    icon: '📖',
+    href: '/blog',
+  },
+  {
+    title: "Buying Guides",
+    description: 'In-depth guides to help you make informed decisions when purchasing shoes.',
+    icon: '🔍',
+    href: '/blog',
+  },
+];
+
+const features = [
+  { icon: '📚', title: 'In-Depth Research', description: 'Every article is thoroughly researched for accuracy and value.' },
+  { icon: '🔍', title: 'Detailed Guides', description: 'Step-by-step care guides and comprehensive brand histories.' },
+  { icon: '💡', title: 'Expert Insights', description: 'Knowledge shared by passionate shoe enthusiasts and experts.' },
+  { icon: '🔄', title: 'Regular Updates', description: 'New content added regularly to keep you informed.' },
+];
+---
+
+<BaseLayout title="Home" description="ShoesByMe — Your trusted source for shoe knowledge, brand histories, care tips, and buying guides.">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <span class="badge">Shoe Knowledge Hub</span>
+        <h1>Your Guide to <span class="highlight">Perfect Footwear</span></h1>
+        <p class="hero-desc">
+          Discover brand histories, care tips, and expert advice to help you
+          appreciate and maintain your footwear.
+        </p>
+        <div class="hero-actions">
+          <a href="/blog" class="btn btn-primary btn-lg">Start Reading</a>
+          <a href="/about" class="btn btn-secondary btn-lg">Our Mission</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-image-placeholder" role="img" aria-label="Shoe knowledge and care guides">
+          <span aria-hidden="true">👟</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Strip -->
+  <section class="stats-strip">
+    <div class="container">
+      <div class="stats-grid">
+        {stats.map(stat => (
+          <div class="stat-item">
+            <span class="stat-value">{stat.value}</span>
+            <span class="stat-label">{stat.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Categories -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge">What We Cover</span>
+        <h2>Explore Our Content</h2>
+        <p>Dive into our comprehensive collection of shoe knowledge.</p>
+      </div>
+      <div class="grid grid-3">
+        {categories.map(category => (
+          <a href={category.href} class="collection-card">
+            <div class="collection-icon">{category.icon}</div>
+            <h3>{category.title}</h3>
+            <p>{category.description}</p>
+            <span class="collection-link">Explore Articles →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge">Why ShoesByMe</span>
+        <h2>Quality Content You Can Trust</h2>
+        <p>We're committed to providing valuable, accurate shoe knowledge.</p>
+      </div>
+      <div class="process-grid">
+        {features.map(feature => (
+          <div class="process-step">
+            <span class="feature-icon">{feature.icon}</span>
+            <h3>{feature.title}</h3>
+            <p>{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Blog Posts -->
+  {latestPosts.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge">Latest Articles</span>
+          <h2>From Our Blog</h2>
+          <p>Stay updated with our latest shoe knowledge and insights.</p>
+        </div>
+        <div class="grid grid-3">
+          {latestPosts.map(post => (
+            <a href={`/blog/${post.id}`} class="blog-card">
+              <div class="blog-card-image" role="img" aria-label={`Blog post: ${post.data.title}`}>
+                {post.data.heroImage ? (
+                  <img src={post.data.heroImage} alt={post.data.title} width="400" height="180" loading="lazy" />
+                ) : (
+                  <span aria-hidden="true">📝</span>
+                )}
+              </div>
+              <div class="blog-card-content">
+                <span class="badge">{post.data.category}</span>
+                <h3>{post.data.title}</h3>
+                <p>{post.data.description}</p>
+                <time>{post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+              </div>
+            </a>
+          ))}
+        </div>
+        <div class="section-cta">
+          <a href="/blog" class="btn btn-secondary">View All Articles</a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA Banner -->
+  <section class="cta-banner">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Ready to Expand Your Shoe Knowledge?</h2>
+        <p>Explore our comprehensive guides and brand histories today.</p>
+        <div class="cta-actions">
+          <a href="/blog" class="btn btn-primary btn-lg">Start Reading</a>
+          <a href="/contact" class="btn btn-secondary btn-lg">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .hero {
+    padding: var(--space-4xl) 0;
+    background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
+  }
+
+  .hero .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+    align-items: center;
+  }
+
+  .hero-content {
+    max-width: 560px;
+  }
+
+  .hero-content h1 {
+    font-size: 3.5rem;
+    margin: var(--space-lg) 0;
+    line-height: 1.1;
+  }
+
+  .highlight {
+    color: var(--color-primary);
+  }
+
+  .hero-desc {
+    font-size: 1.15rem;
+    color: var(--color-text-light);
+    margin-bottom: var(--space-xl);
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: var(--space-md);
+  }
+
+  .hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-image-placeholder {
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(135deg, var(--color-accent-light) 0%, var(--color-accent) 100%);
+    border-radius: var(--radius-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8rem;
+  }
+
+  /* Stats */
+  .stats-strip {
+    background: var(--color-primary);
+    padding: var(--space-xl) 0;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-xl);
+    text-align: center;
+  }
+
+  .stat-item {
+    color: white;
+  }
+
+  .stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    font-family: var(--font-heading);
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+  }
+
+  /* Section Header */
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
+  }
+
+  .section-header h2 {
+    margin: var(--space-md) 0;
+  }
+
+  .section-header p {
+    color: var(--color-text-light);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Collection Cards */
+  .collection-card {
+    display: block;
+    background: var(--color-bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border-light);
+    padding: var(--space-2xl);
+    text-decoration: none;
+    transition: all var(--transition-base);
+  }
+
+  .collection-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--color-primary);
+  }
+
+  .collection-icon {
+    font-size: 3rem;
+    margin-bottom: var(--space-lg);
+  }
+
+  .collection-card h3 {
+    color: var(--color-text);
+    margin-bottom: var(--space-md);
+  }
+
+  .collection-card p {
+    color: var(--color-text-light);
+    margin-bottom: var(--space-lg);
+  }
+
+  .collection-link {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  /* Features */
+  .feature-icon {
+    display: inline-block;
+    font-size: 3rem;
+    margin-bottom: var(--space-lg);
+  }
+
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-xl);
+  }
+
+  .process-step {
+    text-align: center;
+    padding: var(--space-xl);
+  }
+
+  .process-step h3 {
+    margin-bottom: var(--space-md);
+  }
+
+  .process-step p {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+  }
+
+  /* Blog Cards */
+  .blog-card {
+    display: block;
+    background: var(--color-bg-card);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--color-border-light);
+    text-decoration: none;
+    transition: all var(--transition-base);
+  }
+
+  .blog-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .blog-card-image {
+    height: 180px;
+    background: var(--color-bg-alt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    overflow: hidden;
+  }
+
+  .blog-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .blog-card-content {
+    padding: var(--space-lg);
+  }
+
+  .blog-card-content h3 {
+    font-size: 1.1rem;
+    margin: var(--space-sm) 0;
+    color: var(--color-text);
+  }
+
+  .blog-card-content p {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    margin-bottom: var(--space-md);
+  }
+
+  .blog-card-content time {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+
+  .section-cta {
+    text-align: center;
+    margin-top: var(--space-2xl);
+  }
+
+  /* CTA Banner */
+  .cta-banner {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    padding: var(--space-4xl) 0;
+    text-align: center;
+  }
+
+  .cta-content h2 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .cta-content p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    margin-bottom: var(--space-xl);
+  }
+
+  .cta-actions {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+  }
+
+  .cta-banner .btn-secondary {
+    border-color: white;
+    color: white;
+  }
+
+  .cta-banner .btn-secondary:hover {
+    background: white;
+    color: var(--color-primary);
+  }
+
+  @media (max-width: 768px) {
+    .hero .container {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .hero-content h1 {
+      font-size: 2.5rem;
+    }
+
+    .hero-actions {
+      justify-content: center;
+    }
+
+    .hero-image-placeholder {
+      width: 280px;
+      height: 280px;
+      font-size: 5rem;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .process-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cta-content h2 {
+      font-size: 1.8rem;
+    }
+
+    .cta-actions {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>

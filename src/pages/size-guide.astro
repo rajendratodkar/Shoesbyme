@@ -1,0 +1,263 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const sizeData = [
+  { us: '6', uk: '5.5', eu: '38.5', cm: '24' },
+  { us: '6.5', uk: '6', eu: '39', cm: '24.5' },
+  { us: '7', uk: '6.5', eu: '40', cm: '25' },
+  { us: '7.5', uk: '7', eu: '40.5', cm: '25.5' },
+  { us: '8', uk: '7.5', eu: '41', cm: '26' },
+  { us: '8.5', uk: '8', eu: '42', cm: '26.5' },
+  { us: '9', uk: '8.5', eu: '42.5', cm: '27' },
+  { us: '9.5', uk: '9', eu: '43', cm: '27.5' },
+  { us: '10', uk: '9.5', eu: '44', cm: '28' },
+  { us: '10.5', uk: '10', eu: '44.5', cm: '28.5' },
+  { us: '11', uk: '10.5', eu: '45', cm: '29' },
+  { us: '11.5', uk: '11', eu: '45.5', cm: '29.5' },
+  { us: '12', uk: '11.5', eu: '46', cm: '30' },
+  { us: '13', uk: '12.5', eu: '47.5', cm: '31' },
+];
+
+const measurementSteps = [
+  { step: '1', title: 'Trace Your Foot', description: 'Place your foot on a piece of paper and trace around it with a pen.' },
+  { step: '2', title: 'Measure Length', description: 'Measure from the heel to the longest toe in centimeters.' },
+  { step: '3', title: 'Measure Width', description: 'Measure the widest part of your foot across the ball.' },
+  { step: '4', title: 'Find Your Size', description: 'Use our size chart to find your perfect fit.' },
+];
+---
+
+<BaseLayout title="Size Guide" description="Find your perfect shoe size with our comprehensive international size conversion chart and measurement guide.">
+  <!-- Hero -->
+  <section class="size-hero">
+    <div class="container">
+      <span class="badge">Size Guide</span>
+      <h1>Find Your Perfect <span class="highlight">Fit</span></h1>
+      <p class="hero-desc">
+        Getting the right size is essential for comfort. Use our comprehensive
+        size guide to find your perfect fit.
+      </p>
+    </div>
+  </section>
+
+  <!-- Measurement Steps -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>How to Measure</h2>
+        <p>Follow these simple steps to find your accurate shoe size.</p>
+      </div>
+      <div class="grid grid-4">
+        {measurementSteps.map(step => (
+          <div class="measure-step">
+            <span class="step-number">{step.step}</span>
+            <h3>{step.title}</h3>
+            <p>{step.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Size Chart -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2>Men's Size Chart</h2>
+        <p>International shoe size conversion for men's footwear.</p>
+      </div>
+      <div class="size-table-wrapper">
+        <table class="size-table">
+          <caption class="sr-only">Men's International Shoe Size Conversion</caption>
+          <thead>
+            <tr>
+              <th>US</th>
+              <th>UK</th>
+              <th>EU</th>
+              <th>CM</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sizeData.map(size => (
+              <tr>
+                <td>{size.us}</td>
+                <td>{size.uk}</td>
+                <td>{size.eu}</td>
+                <td>{size.cm}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="size-tips">
+        <h3>Fit Tips</h3>
+        <ul>
+          <li>Measure your feet in the afternoon when they're at their largest.</li>
+          <li>If you're between sizes, we recommend going half a size up.</li>
+          <li>Width matters as much as length — consider your foot width when choosing sizes.</li>
+          <li>Different brands may fit differently — always check brand-specific sizing.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Need More Help?</h2>
+        <p>Check out our blog for more sizing tips and brand-specific guides.</p>
+        <a href="/blog" class="btn btn-primary btn-lg">Read Our Guides</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .size-hero {
+    padding: var(--space-4xl) 0;
+    background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
+    text-align: center;
+  }
+
+  .size-hero h1 {
+    font-size: 3rem;
+    margin: var(--space-lg) 0;
+  }
+
+  .highlight {
+    color: var(--color-primary);
+  }
+
+  .hero-desc {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    color: var(--color-text-light);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
+  }
+
+  .section-header h2 {
+    margin-bottom: var(--space-md);
+  }
+
+  .section-header p {
+    color: var(--color-text-light);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .measure-step {
+    text-align: center;
+    padding: var(--space-xl);
+  }
+
+  .step-number {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    background: var(--color-accent-light);
+    color: var(--color-primary-dark);
+    border-radius: var(--radius-full);
+    font-size: 1.25rem;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    margin-bottom: var(--space-lg);
+  }
+
+  .measure-step h3 {
+    margin-bottom: var(--space-md);
+  }
+
+  .measure-step p {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+  }
+
+  .size-table-wrapper {
+    overflow-x: auto;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .size-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--color-bg-card);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+
+  .size-table th,
+  .size-table td {
+    padding: var(--space-md) var(--space-xl);
+    text-align: center;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .size-table th {
+    background: var(--color-primary);
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+  }
+
+  .size-table tr:hover {
+    background: var(--color-bg-alt);
+  }
+
+  .size-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .size-tips {
+    background: var(--color-bg-card);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    border: 1px solid var(--color-border-light);
+  }
+
+  .size-tips h3 {
+    margin-bottom: var(--space-lg);
+  }
+
+  .size-tips ul {
+    list-style: disc;
+    padding-left: var(--space-xl);
+  }
+
+  .size-tips li {
+    color: var(--color-text-light);
+    margin-bottom: var(--space-sm);
+    line-height: 1.6;
+  }
+
+  .cta-banner {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    padding: var(--space-4xl) 0;
+    text-align: center;
+  }
+
+  .cta-content h2 {
+    color: white;
+    margin-bottom: var(--space-md);
+  }
+
+  .cta-content p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: var(--space-xl);
+  }
+
+  @media (max-width: 768px) {
+    .size-hero h1 {
+      font-size: 2rem;
+    }
+  }
+</style>

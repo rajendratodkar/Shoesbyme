@@ -1,0 +1,192 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const faqSections = [
+  {
+    title: 'About ShoesByMe',
+    items: [
+      { q: 'What is ShoesByMe?', a: 'ShoesByMe is a blog dedicated to shoe knowledge, covering brand histories, shoe care tips, buying guides, and the latest trends in footwear.' },
+      { q: 'Who writes the articles?', a: 'Our articles are written by shoe enthusiasts and industry experts who are passionate about footwear and sharing their knowledge.' },
+      { q: 'How often is new content published?', a: 'We publish new articles regularly, covering the latest shoe brands, care techniques, and industry news.' },
+    ],
+  },
+  {
+    title: 'Content & Topics',
+    items: [
+      { q: 'What topics do you cover?', a: 'We cover shoe brand histories, shoe care and maintenance guides, buying guides, material explanations, and footwear industry news.' },
+      { q: 'Can I request a specific topic?', a: 'Absolutely! We love hearing from our readers. Contact us with your topic suggestions and we\'ll do our best to cover them.' },
+      { q: 'Do you review specific products?', a: 'Our focus is on educational content about shoes rather than product reviews. We discuss brands, materials, and care techniques.' },
+    ],
+  },
+  {
+    title: 'Shoe Care',
+    items: [
+      { q: 'How do I care for leather shoes?', a: 'Regular brushing, conditioning with leather cream, and proper storage will keep your shoes looking great for years. Check out our detailed care guides for specific instructions.' },
+      { q: 'Can I wear my shoes in the rain?', a: 'While many shoes are water-resistant, we recommend applying a waterproof spray for extra protection in heavy rain. Read our care articles for more tips.' },
+      { q: 'How do I clean suede shoes?', a: 'Use a suede brush to remove surface dirt, and a suede eraser for stains. Avoid water when possible. See our suede care guide for detailed instructions.' },
+    ],
+  },
+  {
+    title: 'Sizing & Fit',
+    items: [
+      { q: 'How do I find my shoe size?', a: 'Visit our Size Guide page for detailed measurement instructions. Different brands may fit slightly differently, so always check brand-specific sizing charts.' },
+      { q: 'Do different brands fit differently?', a: 'Yes, sizing can vary between brands and even between different models from the same brand. Our blog articles often include sizing tips for specific brands.' },
+      { q: 'How should shoes fit?', a: 'Shoes should feel comfortable from the start with no pinching or rubbing. There should be about a thumb\'s width of space between your longest toe and the shoe tip.' },
+    ],
+  },
+  {
+    title: 'Contact & Support',
+    items: [
+      { q: 'How can I contact you?', a: 'You can reach us through our Contact page or email us directly at rajendra@shoesbyme.com. We aim to respond within 24-48 hours.' },
+      { q: 'Can I contribute to the blog?', a: 'We welcome guest contributions from shoe enthusiasts. Contact us with your pitch and we\'ll review it for consideration.' },
+      { q: 'Do you offer consulting services?', a: 'Our primary focus is the blog. For business inquiries or partnerships, please reach out via our Contact page.' },
+    ],
+  },
+];
+---
+
+<BaseLayout title="FAQ" description="Frequently asked questions about ShoesByMe shoe blog, content, care tips, and sizing guides.">
+  <!-- Hero -->
+  <section class="faq-hero">
+    <div class="container">
+      <span class="badge">Help Center</span>
+      <h1>Frequently Asked <span class="highlight">Questions</span></h1>
+      <p class="hero-desc">
+        Find answers to common questions about our blog, shoe care tips,
+        sizing guides, and more.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ Content -->
+  <section class="section">
+    <div class="container container-narrow">
+      {faqSections.map(section => (
+        <div class="faq-section">
+          <h2>{section.title}</h2>
+          <div class="faq-list">
+            {section.items.map(item => (
+              <details class="faq-item">
+                <summary class="faq-question">{item.q}</summary>
+                <div class="faq-answer">
+                  <p>{item.a}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <div class="faq-cta">
+        <h3>Still Have Questions?</h3>
+        <p>Can't find what you're looking for? We're happy to help.</p>
+        <a href="/contact" class="btn btn-primary">Contact Us</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .faq-hero {
+    padding: var(--space-4xl) 0;
+    background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
+    text-align: center;
+  }
+
+  .faq-hero h1 {
+    font-size: 3rem;
+    margin: var(--space-lg) 0;
+  }
+
+  .highlight {
+    color: var(--color-primary);
+  }
+
+  .hero-desc {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    color: var(--color-text-light);
+  }
+
+  .faq-section {
+    margin-bottom: var(--space-3xl);
+  }
+
+  .faq-section h2 {
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-md);
+    border-bottom: 2px solid var(--color-border);
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .faq-item {
+    background: var(--color-bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border-light);
+    overflow: hidden;
+  }
+
+  .faq-question {
+    padding: var(--space-lg) var(--space-xl);
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question::after {
+    content: '+';
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    transition: transform var(--transition-fast);
+  }
+
+  .faq-item[open] .faq-question::after {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    padding: 0 var(--space-xl) var(--space-lg);
+  }
+
+  .faq-answer p {
+    color: var(--color-text-light);
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  .faq-cta {
+    text-align: center;
+    padding: var(--space-2xl);
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-lg);
+    margin-top: var(--space-2xl);
+  }
+
+  .faq-cta h3 {
+    margin-bottom: var(--space-md);
+  }
+
+  .faq-cta p {
+    color: var(--color-text-light);
+    margin-bottom: var(--space-xl);
+  }
+
+  @media (max-width: 768px) {
+    .faq-hero h1 {
+      font-size: 2rem;
+    }
+  }
+</style>

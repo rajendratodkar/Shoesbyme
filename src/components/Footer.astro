@@ -1,0 +1,262 @@
+---
+const currentYear = new Date().getFullYear();
+
+const footerLinks = {
+  browse: [
+    { label: 'Blog', href: '/blog' },
+    { label: 'Size Guide', href: '/size-guide' },
+  ],
+  company: [
+    { label: 'About Us', href: '/about' },
+    { label: 'Contact', href: '/contact' },
+    { label: 'FAQ', href: '/faq' },
+  ],
+  legal: [
+    { label: 'Privacy Policy', href: '/privacy-policy' },
+    { label: 'Terms & Conditions', href: '/terms-and-conditions' },
+    { label: 'Disclaimer', href: '/disclaimer' },
+  ],
+};
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="footer-logo">
+          <span class="logo-icon">👟</span>
+          <span>ShoesByMe</span>
+        </a>
+        <p class="footer-tagline">Step Into Your Style</p>
+        <p class="footer-desc">Your trusted source for shoe knowledge, care tips, and brand history.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook" class="social-link">FB</a>
+          <a href="#" aria-label="Instagram" class="social-link">IG</a>
+          <a href="#" aria-label="Twitter" class="social-link">TW</a>
+          <a href="#" aria-label="Pinterest" class="social-link">PT</a>
+        </div>
+      </div>
+
+      <div class="footer-links-group">
+        <h4>Browse</h4>
+        <ul>
+          {footerLinks.browse.map(link => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="footer-links-group">
+        <h4>Company</h4>
+        <ul>
+          {footerLinks.company.map(link => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="footer-links-group">
+        <h4>Legal</h4>
+        <ul>
+          {footerLinks.legal.map(link => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="footer-newsletter">
+        <h4>Stay Updated</h4>
+        <p>Subscribe for the latest shoe knowledge and style tips.</p>
+        <form class="newsletter-form" id="newsletter-form">
+          <label for="newsletter-email" class="sr-only">Email address</label>
+          <input type="email" id="newsletter-email" name="email" placeholder="Your email" class="newsletter-input" required />
+          <button type="submit" class="btn btn-accent btn-sm">Subscribe</button>
+        </form>
+        <p class="newsletter-status" id="newsletter-status" aria-live="polite"></p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; {currentYear} Shoesbyme. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const form = document.getElementById('newsletter-form') as HTMLFormElement;
+  const status = document.getElementById('newsletter-status');
+  if (form && status) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = form.querySelector('input')?.value;
+      if (email) {
+        status.textContent = 'Thank you for subscribing!';
+        form.reset();
+        setTimeout(() => { status.textContent = ''; }, 3000);
+      }
+    });
+  }
+</script>
+
+<style>
+  .footer {
+    background: var(--color-text);
+    color: var(--color-bg);
+    padding: var(--space-4xl) 0 var(--space-xl);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 2fr;
+    gap: var(--space-2xl);
+    margin-bottom: var(--space-3xl);
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    margin-bottom: var(--space-md);
+  }
+
+  .footer-logo .logo-icon {
+    font-size: 1.8rem;
+  }
+
+  .footer-tagline {
+    color: var(--color-accent);
+    font-weight: 600;
+    margin-bottom: var(--space-md);
+  }
+
+  .footer-desc {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    margin-bottom: var(--space-lg);
+  }
+
+  .social-links {
+    display: flex;
+    gap: var(--space-sm);
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background var(--transition-fast);
+  }
+
+  .social-link:hover {
+    background: var(--color-primary);
+  }
+
+  .footer-links-group h4 {
+    color: white;
+    font-size: 1rem;
+    margin-bottom: var(--space-lg);
+  }
+
+  .footer-links-group ul {
+    list-style: none;
+  }
+
+  .footer-links-group li {
+    margin-bottom: var(--space-sm);
+  }
+
+  .footer-links-group a {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .footer-links-group a:hover {
+    color: var(--color-accent);
+  }
+
+  .footer-newsletter h4 {
+    color: white;
+    font-size: 1rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .footer-newsletter p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .newsletter-form {
+    display: flex;
+    gap: var(--space-sm);
+  }
+
+  .newsletter-input {
+    flex: 1;
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 0.9rem;
+  }
+
+  .newsletter-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .newsletter-input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+  }
+
+  .newsletter-status {
+    color: var(--color-accent);
+    font-size: 0.85rem;
+    margin-top: var(--space-sm);
+    min-height: 1.2em;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: var(--space-xl);
+    text-align: center;
+  }
+
+  .footer-bottom p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .footer-logo,
+    .social-links {
+      justify-content: center;
+    }
+
+    .newsletter-form {
+      flex-direction: column;
+    }
+  }
+</style>
